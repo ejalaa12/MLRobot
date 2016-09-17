@@ -1,0 +1,5 @@
+- Move individual to evolvable
+- Move optimization to HillClimber
+- Learn more about GA optimization
+- Move to GA optimization
+- Learn more about Reinforcement learning
