@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+    Alaa El Jawad
+    ~~~~~~~~~~~~~
+    Module for testing how to max a function using Evolvable and HillClimber
+"""
 from random import random
 from pybrain.structure.evolvables.evolvable import Evolvable
 from pybrain.optimization import HillClimber
@@ -19,10 +25,12 @@ class SimpleEvo(Evolvable):
     def __repr__(self):
         return str(self.x)
 
+    def fitness(self):
+        return (self.x / 3 - 4)**3 - 3 * self.x + 20
+
 
 x0 = SimpleEvo(1.2)
-x1 = SimpleEvo(2.4)
-l = HillClimber(lambda x: abs(x.x), x1, minimize=True, maxEvaluations=100)
-l.learn()
-print l.bestEvaluable
-print x0, x1
+le = HillClimber(lambda x: x.fitness(), x0, minimize=False, maxEvaluations=500)
+le.learn()
+print le.bestEvaluable, le.bestEvaluation
+print x0
