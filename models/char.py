@@ -35,3 +35,16 @@ class Char(SimulationModel):
     def simulate(self, u):
         self.X = self.X + self.fdot(u) * self.dt
         self.x, self.y, self.theta = self.X
+
+
+if __name__ == '__main__':
+    c = Char()
+    trajx, trajy = [], []
+    for t in xrange(1, 10):
+        c.simulate([1, 1])
+        print c.X
+        trajx.append(c.X[0])
+        trajy.append(c.X[1])
+    plt.plot(trajx, trajy)
+    plt.axis('equal')
+    plt.show()
