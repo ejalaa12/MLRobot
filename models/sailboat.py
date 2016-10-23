@@ -135,7 +135,7 @@ if __name__ == '__main__':
     s = Sailboat()
     trajx, trajy = [], []
     for t in xrange(1, 10):
-        s.simulate([-2, 0.5], -1, -np.pi / 2)
+        s.simulate([-0.037, 0.255], -1, -np.pi / 2)
         print s.X
         trajx.append(s.X[0])
         trajy.append(s.X[1])
