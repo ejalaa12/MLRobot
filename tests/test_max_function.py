@@ -30,7 +30,9 @@ class SimpleEvo(Evolvable):
 
 
 x0 = SimpleEvo(1.2)
-le = HillClimber(lambda x: x.fitness(), x0, minimize=False, maxEvaluations=500)
+x = [0., 10.]
+# le = HillClimber(lambda x: x.fitness(), x0, minimize=False, maxEvaluations=500)
+le = HillClimber(lambda x: -abs(x[0]+2) + 5 - abs(x[1]), x, minimize=False, maxEvaluations=500)
 le.learn()
-print le.bestEvaluable, le.bestEvaluation
+print le.bestEvaluable.params, le.bestEvaluation
 print x0

@@ -21,9 +21,10 @@ class Sailboat(SimulationModel):
         State Equations from L. Jaulin (cf ROBMOOC)
     """
 
-    def __init__(self, x=0, y=0, theta=0, v=0, w=0):
+    def __init__(self, x=0, y=0, theta=0, v=0, w=0, dt=0.1):
         super(Sailboat, self).__init__()
-        self.dt = 0.1
+        self.dt = dt
+        self.cmd_size = 2
         # State
         self.x = x
         self.y = y
@@ -123,7 +124,11 @@ class Sailboat(SimulationModel):
         u = np.array([deltar, deltasmax])
         return u
 
-    def simulate(self, u, awind, psi):
+    def simulate(self, u, env_conditions):
+        if len(u) != self.cmd_size:
+            print "*** WARNING : WRONG CMD SIZE"
+        awind = env_conditions['wind_force']
+        psi = env_conditions['wind_direction']
         # sim
         xdot = self.fdot(u, awind, psi)
         # print xdot
@@ -134,8 +139,10 @@ class Sailboat(SimulationModel):
 if __name__ == '__main__':
     s = Sailboat()
     trajx, trajy = [], []
+    envconditions = {'wind_direction': -1,
+                       'wind_force': np.pi/3}
     for t in xrange(1, 10):
-        s.simulate([-0.037, 0.255], -1, -np.pi / 2)
+        s.simulate([-0.037, 0.255], envconditions)
         print s.X
         trajx.append(s.X[0])
         trajy.append(s.X[1])

@@ -39,8 +39,9 @@ class SailboatEvo(Evolvable):
         return str(txt)
 
     def fitness(self):
-        for t in xrange(1, 100):
-            self.sailboat.simulate(self.cmd, -1, -pi / 2)
+        env_conditions = {'wind_force': -1, 'wind_direction':-pi/2}
+        for t in xrange(1, 200):
+            self.sailboat.simulate(self.cmd, env_conditions)
         return (self.sailboat.x ** 2 + self.sailboat.y ** 2) ** 0.5
 
 

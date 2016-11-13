@@ -5,12 +5,13 @@ from numpy import array
 class SimulationModel(object):
     """Abstract class for models for simulation"""
 
-    def __init__(self, x=0, y=0, dt=0.1):
+    def __init__(self, x=0, y=0, dt=0.1, speed=1):
         super(SimulationModel, self).__init__()
         self.x = 0
         self.y = 0
         self.X = array([self.x, self.y])
         self.dt = dt
+        self.speed = speed
 
     @abc.abstractmethod
     def draw(self):
